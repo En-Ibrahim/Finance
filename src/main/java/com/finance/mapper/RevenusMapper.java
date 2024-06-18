@@ -1,8 +1,6 @@
 package com.finance.mapper;
 
-import com.finance.dto.InvoicesDTO;
 import com.finance.dto.RevenusDTO;
-import com.finance.entity.Invoices;
 import com.finance.entity.Revenus;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

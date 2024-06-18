@@ -1,7 +1,5 @@
 package com.finance.dto;
 
-import com.finance.entity.Account;
-import jakarta.persistence.ManyToOne;
 import lombok.*;
 
 import java.time.LocalDateTime;

@@ -1,7 +1,6 @@
 package com.finance.services;
 
 import com.finance.dto.RevenusDTO;
-import com.finance.entity.Invoices;
 import com.finance.entity.Revenus;
 import com.finance.mapper.RevenusMapper;
 import com.finance.repo.RevenusRepo;

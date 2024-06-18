@@ -1,7 +1,7 @@
 package com.finance.mapper;
 
-import com.finance.entity.Account;
 import com.finance.dto.AccountDTO;
+import com.finance.entity.Account;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

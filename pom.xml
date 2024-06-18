@@ -45,9 +45,6 @@
 		</dependency>
 
 
-
-
-
 		<!--	database connection-->
 		<dependency>
 			<groupId>com.mysql</groupId>

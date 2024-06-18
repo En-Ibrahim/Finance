@@ -1,10 +1,8 @@
 package com.finance.services;
 
 import com.finance.dto.InvoicesDTO;
-import com.finance.entity.Expenses;
 import com.finance.entity.Invoices;
 import com.finance.mapper.InvoicesMapper;
-import com.finance.repo.ExpensesRepo;
 import com.finance.repo.InvoicesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
