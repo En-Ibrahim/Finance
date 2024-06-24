@@ -1,7 +1,9 @@
 package com.finance.services;
 
 import com.finance.dto.InvoicesDTO;
+import com.finance.entity.Expenses;
 import com.finance.entity.Invoices;
+import com.finance.exceptions.RecordNotFoundException;
 import com.finance.mapper.InvoicesMapper;
 import com.finance.repo.InvoicesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +28,17 @@ public class InvoicesService {
         Optional<Invoices> check = invoicesRepo.findById(invoices.getId());
 
         if (check.isEmpty())
-            throw new IllegalArgumentException("Not found to update");
+            throw new RecordNotFoundException("Not found to update");
 
         return mapper.mapToDto(invoicesRepo.save(invoices));
     }
 
     public InvoicesDTO findInvoicesByID(Long id) {
-        return mapper.mapToDto(invoicesRepo.findById(id).orElseThrow());
+        Optional<Invoices> invoices =invoicesRepo.findById(id);
+        if(invoices.isEmpty()&& invoices==null)
+            throw new RecordNotFoundException("Not found invoices");
+
+        return mapper.mapToDto(invoices.get());
     }
 
 

@@ -2,6 +2,7 @@ package com.finance.services;
 
 import com.finance.dto.ExpensesDTO;
 import com.finance.entity.Expenses;
+import com.finance.exceptions.RecordNotFoundException;
 import com.finance.mapper.ExpensesMapper;
 import com.finance.repo.ExpensesRepo;
 import lombok.RequiredArgsConstructor;
@@ -28,13 +29,17 @@ public class ExpensesService {
         Optional<Expenses> check = expensesRepo.findById(expenses.getId());
 
         if (check.isEmpty())
-            throw new IllegalArgumentException("Not found to update");
+            throw new RecordNotFoundException("Not found to update");
 
         return mapper.mapToDTO(expensesRepo.save(expenses));
     }
 
     public ExpensesDTO findExpensesByID(Long id) {
-        return mapper.mapToDTO(expensesRepo.findById(id).orElseThrow());
+        Optional<Expenses> expenses =expensesRepo.findById(id);
+        if(expenses.isEmpty()&& expenses==null)
+            throw new RecordNotFoundException("Not found expenses");
+
+        return mapper.mapToDTO(expenses.get());
     }
 
 

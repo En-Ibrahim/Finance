@@ -1,9 +1,8 @@
 package com.finance.entity;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import lombok.*;
@@ -18,13 +17,15 @@ import java.time.LocalDateTime;
 @Entity
 public class Account {
 
-    @Id
+        @Id
+        @GeneratedValue(strategy = GenerationType.AUTO)
         private Long ID;
 
         @Email
         private String email;
 
         private String password;
+
 
         private LocalDateTime dateTime;
 

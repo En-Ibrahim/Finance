@@ -2,6 +2,7 @@ package com.finance.services;
 
 import com.finance.dto.TransactionDTO;
 import com.finance.entity.Transaction;
+import com.finance.exceptions.RecordNotFoundException;
 import com.finance.mapper.TransactionMapper;
 import com.finance.repo.TransactionRepo;
 import lombok.RequiredArgsConstructor;
@@ -28,13 +29,17 @@ public class TransactionService {
         Optional<Transaction> check = transactionRepo.findById(transaction.getId());
 
         if (check.isEmpty())
-            throw new IllegalArgumentException("Not found to update");
+            throw new RecordNotFoundException("Not found to update");
 
         return mapper.mapToDto(transactionRepo.save(transaction));
     }
 
     public TransactionDTO findTransactionByID(Long id) {
-        return mapper.mapToDto(transactionRepo.findById(id).orElseThrow());
+        Optional<Transaction> transaction =transactionRepo.findById(id);
+        if(transaction.isEmpty()&& transaction==null)
+            throw new RecordNotFoundException("Not found transaction");
+
+        return mapper.mapToDto(transaction.get());
     }
 
 

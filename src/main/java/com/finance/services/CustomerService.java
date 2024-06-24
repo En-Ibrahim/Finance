@@ -2,6 +2,7 @@ package com.finance.services;
 
 
 import com.finance.entity.Customer;
+import com.finance.exceptions.RecordNotFoundException;
 import com.finance.repo.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,13 +27,18 @@ public class CustomerService {
         Optional<Customer> check = customerRepo.findById(customer.getId());
 
         if (check.isEmpty())
-            throw new IllegalArgumentException("Not found to update");
+            throw new RecordNotFoundException("Not found to update");
 
         return customerRepo.save(customer);
     }
 
     public Customer findCustomerByID(Long id) {
-        return customerRepo.findById(id).orElseThrow();
+
+        Optional<Customer> entity=customerRepo.findById(id);
+        if(entity.isPresent())
+            return entity.get();
+        else
+            throw new RecordNotFoundException("This record id >> "+id+" not found");
     }
 
 

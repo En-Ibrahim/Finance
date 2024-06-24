@@ -2,6 +2,7 @@ package com.finance.services;
 
 import com.finance.dto.RevenusDTO;
 import com.finance.entity.Revenus;
+import com.finance.exceptions.RecordNotFoundException;
 import com.finance.mapper.RevenusMapper;
 import com.finance.repo.RevenusRepo;
 import lombok.RequiredArgsConstructor;
@@ -28,13 +29,17 @@ public class RevenusServices {
         Optional<Revenus> check = revenusRepo.findById(revenus.getId());
 
         if (check.isEmpty())
-            throw new IllegalArgumentException("Not found to update");
+            throw new RecordNotFoundException("Not found to update");
 
         return mapper.mapToDto(revenusRepo.save(revenus));
     }
 
     public RevenusDTO findRevenusByID(Long id) {
-        return mapper.mapToDto(revenusRepo.findById(id).orElseThrow());
+        Optional<Revenus> revenus =revenusRepo.findById(id);
+        if(revenus.isEmpty()&& revenus==null)
+            throw new RecordNotFoundException("Not found revenus");
+
+        return mapper.mapToDto(revenus.get());
     }
 
 
